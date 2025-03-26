@@ -1,6 +1,14 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import Employee, Award, Leave, DailyActivity, Review_Performance, Mood
+from rest_framework import serializers
+from .models import Employee
+
+class EmployeeIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ['employee_id']  # Only allow employee_id to be added
+
 
 class EmployeeSerializer(serializers.ModelSerializer):
     awards = serializers.SerializerMethodField()

@@ -8,11 +8,27 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Employee, Award, DailyActivity, Mood
 from .serializers import (
-    EmployeeDashboardSerializer, SignupSerializer, LoginSerializer
+    EmployeeDashboardSerializer, SignupSerializer, LoginSerializer, EmployeeIDSerializer
 )
 
 # Setup logging
 logger = logging.getLogger(__name__)
+
+@api_view(['POST'])
+def add_employee(request):
+    logger.info("Received request to add employee with data: %s", request.data)
+
+    serializer = EmployeeIDSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {"message": "Employee added successfully", "employee_id": serializer.data['employee_id']},
+            status=status.HTTP_201_CREATED
+        )
+
+    logger.error("Failed to add employee: %s", serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 def signup(request):
