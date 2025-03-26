@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import dj_database_url
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,14 +59,10 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # ✅ PostgreSQL Configuration (Local Use)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opensoft',
-        'USER': 'postgres',
-        'PASSWORD': 'Dev@2004',
-        'HOST': 'localhost',  # Change to your PostgreSQL host if needed
-        'PORT': '5432',  # Default PostgreSQL port
-    }
+    'default': dj_database_url.config(
+        default="postgresql://opensoft_render_user:FiXM6SbL0eqIZkgY9FdncPdhLrxoMxDf@dpg-cvhsp5hu0jms738cfs0g-a/opensoft_render",
+        conn_max_age=600,
+    )
 }
 
 # Password validation
