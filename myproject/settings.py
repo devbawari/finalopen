@@ -89,8 +89,10 @@ USE_TZ = True
 
 # ✅ Static files configuration
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory where static files will be collected
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Optional: Additional static file directories
+]
 
 # ✅ Media files configuration (For handling uploads)
 MEDIA_URL = '/media/'

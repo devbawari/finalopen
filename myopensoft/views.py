@@ -27,6 +27,7 @@ def signup(request):
         )
     
     logger.error("Signup failed: %s", serializer.errors)
+    print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
